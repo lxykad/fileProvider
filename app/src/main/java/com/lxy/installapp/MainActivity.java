@@ -30,8 +30,8 @@ import static zlc.season.rxdownload3.helper.UtilsKt.dispose;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String mDownloadUrl = "http://shouji.360tpcdn.com/170918/93d1695d87df5a0c0002058afc0361f1/com.ss.android.article.news_636.apk";
-//    private String mDownloadUrl = "http://shouji.360tpcdn.com/170919/9f1c0f93a445d7d788519f38fdb3de77/com.UCMobile_704.apk";
+    //private String mDownloadUrl = "http://shouji.360tpcdn.com/170918/93d1695d87df5a0c0002058afc0361f1/com.ss.android.article.news_636.apk";
+    private String mDownloadUrl = "http://shouji.360tpcdn.com/170919/9f1c0f93a445d7d788519f38fdb3de77/com.UCMobile_704.apk";
 
     private ActivityMainBinding mBinding;
     private Disposable mDisposable;
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         if (b) {
             Toast.makeText(MainActivity.this, "文件已存在", Toast.LENGTH_SHORT).show();
             System.out.println("path=======" + mFile.getPath());
-            install();
+           // install();
             return;
         }
 
@@ -153,7 +153,13 @@ public class MainActivity extends AppCompatActivity {
        // mBinding.progressBar.setProgress((int) status.getDownloadSize());
        // mBinding.tvPercent.setText(status.percent());
 
-        System.out.println("status===percent===" + status.percent());
+       // int progress = (int) (status.getDownloadSize()*100/status.getTotalSize());
+       // System.out.println("status===percent===" + progress);
+       // mUpLoadDialog.incrementProgress(1);
+       // mUpLoadDialog.setProgress();
+
+        mUpLoadDialog.getProgressBar().setMax((int) status.getTotalSize());
+        mUpLoadDialog.getProgressBar().setProgress((int) status.getDownloadSize());
 
         //mUpLoadDialog.setProgress((int) status.getDownloadSize()/(int) status.getTotalSize());
 
