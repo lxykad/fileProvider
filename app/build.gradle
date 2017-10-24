@@ -20,6 +20,16 @@ android {
     dataBinding {
         enabled = true
     }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '26.1.0'
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -36,4 +46,6 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     //util
     compile 'com.blankj:utilcode:1.9.3'
+    // dialog
+    compile 'com.afollestad.material-dialogs:core:0.9.4.7'
 }
